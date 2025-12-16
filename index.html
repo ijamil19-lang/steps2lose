@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steps-to-Lose Calculator</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom focus styles for better accessibility */
+        input:focus, select:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px #2563eb; /* blue-600 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 h-full flex items-center justify-center p-4">
+
+    <!-- Calculator Card -->
+    <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 sm:p-8">
+        
+        <h1 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-2">
+            Step-to-Lose Calculator
+        </h1>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-8">
+            Estimate the <span class="font-semibold text-blue-600 dark:text-blue-400">extra</span> steps you need to walk daily to lose weight.
+        </p>
+
+        <!-- Form Inputs -->
+        <div class="space-y-6">
+            
+            <!-- Unit Toggle -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Unit
+                </label>
+                <div class="flex rounded-lg shadow-sm">
+                    <button id="unit-lbs" data-unit="lbs" class="unit-btn active flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-l-lg bg-blue-600 text-white dark:bg-blue-500">
+                        Pounds (lbs)
+                    </button>
+                    <button id="unit-kg" data-unit="kg" class="unit-btn inactive flex-1 inline-flex items-center justify-center px-4 py-2 border-t border-b border-r border-gray-300 dark:border-gray-600 text-sm font-medium rounded-r-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        Kilograms (kg)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Weight -->
+            <div>
+                <label for="current-weight" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Current Weight
+                </label>
+                <input type="number" id="current-weight" placeholder="e.g., 180" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            </div>
+
+            <!-- Weekly Loss Target -->
+            <div>
+                <label for="loss-target" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Weekly Weight Loss Target
+                </label>
+                <select id="loss-target" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none bg-no-repeat bg-right-3" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%2Both%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.23%207.23a.75.75%200%20011.06%200L10%2010.94l3.71-3.71a.75.75%200%20111.06%201.06l-4.25%204.25a.75.75%200%2001-1.06%200L5.23%208.29a.75.75%200%20010-1.06z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');">
+                    <!-- Options will be populated by JS -->
+                </select>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1.5">A safe rate of loss is 1-2 lbs (0.5-1 kg) per week.</p>
+            </div>
+
+            <!-- Deficit Source -->
+            <div>
+                <label for="deficit-split" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    How to Create Your Deficit
+                </label>
+                <select id="deficit-split" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none bg-no-repeat bg-right-3" style="background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%236b7280%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.23%207.23a.75.75%200%20011.06%200L10%2010.94l3.71-3.71a.75.75%200%20111.06%201.06l-4.25%204.25a.75.75%200%2001-1.06%200L5.23%208.29a.75.75%200%20010-1.06z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');">
+                    <option value="0.5" selected>50% from steps, 50% from diet</option>
+                    <option value="1.0">100% from steps</option>
+                </select>
+            </div>
+
+            <!-- Calculate Button -->
+            <button id="calculate-btn" class="w-full bg-blue-600 text-white p-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-150 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
+                Calculate Steps
+            </button>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results-container" class="mt-8 hidden">
+            <div class="bg-blue-50 dark:bg-gray-700 border-l-4 border-blue-500 dark:border-blue-400 p-5 rounded-lg">
+                <h3 class="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">YOUR DAILY GOAL</h3>
+                
+                <!-- Step Result -->
+                <div>
+                    <p class="text-gray-700 dark:text-gray-300">Add this many steps to your day:</p>
+                    <p id="steps-result" class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white my-2">
+                        0
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400">steps / day</p>
+                </div>
+
+                <!-- Diet Result (Conditional) -->
+                <div id="diet-result-container" class="mt-4 pt-4 border-t border-blue-200 dark:border-gray-600">
+                    <p class="text-gray-700 dark:text-gray-300">And reduce your diet by:</p>
+                    <p id="diet-result" class="text-2xl font-bold text-gray-900 dark:text-white my-1">
+                        0
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400">calories / day</p>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <p class="text-xs text-gray-500 dark:text-gray-400 text-center mt-4">
+                This is an estimate based on averages. Your actual calories burned may vary. Always consult a healthcare professional before starting a new diet or exercise plan.
+            </p>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="error-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-sm">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white">Error</h3>
+            <p id="error-message" class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                Please enter a valid weight.
+            </p>
+            <button id="close-error-btn" class="w-full bg-blue-600 text-white p-2 rounded-lg font-semibold mt-4 hover:bg-blue-700 transition duration-150">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const unitLbsBtn = document.getElementById('unit-lbs');
+            const unitKgBtn = document.getElementById('unit-kg');
+            const weightInput = document.getElementById('current-weight');
+            const lossTargetSelect = document.getElementById('loss-target');
+            const deficitSplitSelect = document.getElementById('deficit-split');
+            const calculateBtn = document.getElementById('calculate-btn');
+            
+            const resultsContainer = document.getElementById('results-container');
+            const stepsResult = document.getElementById('steps-result');
+            const dietResultContainer = document.getElementById('diet-result-container');
+            const dietResult = document.getElementById('diet-result');
+
+            const errorModal = document.getElementById('error-modal');
+            const errorMessage = document.getElementById('error-message');
+            const closeErrorBtn = document.getElementById('close-error-btn');
+
+            // --- Constants ---
+            const CALORIES_PER_POUND = 3500;
+            const CALORIES_PER_KG = 7700;
+            // Based on 2500 steps per 100 kcal for a 150lb person
+            // Steps per Calorie = 25 * (150 / Weight in lbs)
+            const BASE_STEPS_PER_CALORIE_ADJUSTER = 25 * 150; 
+
+            const lossTargets = {
+                lbs: [
+                    { value: 0.5, text: '0.5 lbs / week' },
+                    { value: 1.0, text: '1 lb / week (Recommended)' },
+                    { value: 1.5, text: '1.5 lbs / week' },
+                    { value: 2.0, text: '2 lbs / week (Aggressive)' }
+                ],
+                kg: [
+                    { value: 0.25, text: '0.25 kg / week' },
+                    { value: 0.5, text: '0.5 kg / week (Recommended)' },
+                    { value: 0.75, text: '0.75 kg / week' },
+                    { value: 1.0, text: '1 kg / week (Aggressive)' }
+                ]
+            };
+
+            // --- Functions ---
+
+            /**
+             * Populates the weekly loss dropdown based on selected unit
+             * @param {string} unit - 'lbs' or 'kg'
+             */
+            function updateLossTargets(unit) {
+                lossTargetSelect.innerHTML = ''; // Clear existing options
+                const targets = lossTargets[unit];
+                
+                targets.forEach(target => {
+                    const option = document.createElement('option');
+                    option.value = target.value;
+                    option.textContent = target.text;
+                    if (target.text.includes('Recommended')) {
+                        option.selected = true;
+                    }
+                    lossTargetSelect.appendChild(option);
+                });
+            }
+
+            /**
+             * Shows the error modal with a specific message
+             * @param {string} message - The error message to display
+             */
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorModal.classList.remove('hidden');
+            }
+
+            /**
+             * Hides the error modal
+             */
+            function hideError() {
+                errorModal.classList.add('hidden');
+            }
+
+            /**
+* Toggles the active state of the unit buttons
+             * @param {string} activeUnit - 'lbs' or 'kg'
+             */
+            function toggleUnitButtons(activeUnit) {
+                const [activeBtn, inactiveBtn] = (activeUnit === 'lbs') 
+                    ? [unitLbsBtn, unitKgBtn] 
+                    : [unitKgBtn, unitLbsBtn];
+                
+                activeBtn.classList.replace('inactive', 'active');
+                activeBtn.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'dark:bg-blue-500');
+
+                inactiveBtn.classList.replace('active', 'inactive');
+                inactiveBtn.classList.remove('bg-blue-600', 'text-white', 'dark:bg-blue-500');
+                inactiveBtn.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+            }
+
+            /**
+             * Main calculation logic
+             */
+            function calculateSteps() {
+                const unit = document.querySelector('.unit-btn.active').dataset.unit;
+                const currentWeight = parseFloat(weightInput.value);
+                const weeklyLoss = parseFloat(lossTargetSelect.value);
+                const deficitSplit = parseFloat(deficitSplitSelect.value);
+
+                // Validation
+                if (isNaN(currentWeight) || currentWeight <= 0) {
+                    showError('Please enter a valid positive number for your weight.');
+                    return;
+                }
+                if (isNaN(weeklyLoss)) {
+                    showError('Please select a valid weekly loss target.');
+                    return;
+                }
+
+                // 1. Calculate Daily Calorie Deficit
+                const caloriesPerUnit = (unit === 'lbs') ? CALORIES_PER_POUND : CALORIES_PER_KG;
+                const totalWeeklyDeficit = weeklyLoss * caloriesPerUnit;
+                const dailyDeficit = totalWeeklyDeficit / 7;
+
+                // 2. Split deficit between steps and diet
+                const deficitFromSteps = dailyDeficit * deficitSplit;
+                const deficitFromDiet = dailyDeficit * (1 - deficitSplit);
+
+                // 3. Convert weight to LBS for step formula
+                const currentWeightInLbs = (unit === 'kg') ? currentWeight * 2.20462 : currentWeight;
+
+                // 4. Calculate steps needed
+                // Heavier people burn more calories per step
+                const stepsPerCalorie = BASE_STEPS_PER_CALORIE_ADJUSTER / currentWeightInLbs;
+                const additionalDailySteps = deficitFromSteps * stepsPerCalorie;
+
+                // 5. Display results
+                stepsResult.textContent = Math.round(additionalDailySteps).toLocaleString('en-US');
+
+                if (deficitFromDiet > 0) {
+                    dietResultContainer.classList.remove('hidden');
+                    dietResult.textContent = Math.round(deficitFromDiet).toLocaleString('en-US');
+                } else {
+                    dietResultContainer.classList.add('hidden');
+
+                }
+
+                resultsContainer.classList.remove('hidden');
+            }
+
+            // --- Event Listeners ---
+
+            // Unit button clicks
+            [unitLbsBtn, unitKgBtn].forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const unit = btn.dataset.unit;
+                    toggleUnitButtons(unit);
+                    updateLossTargets(unit);
+                    resultsContainer.classList.add('hidden'); // Hide results on unit change
+                });
+            });
+
+            // Calculate button click
+            calculateBtn.addEventListener('click', calculateSteps);
+
+            // Close error modal
+            closeErrorBtn.addEventListener('click', hideError);
+
+            // --- Initial Setup ---
+            updateLossTargets('lbs'); // Initialize dropdown with lbs
+        });
+    </script>
+</body>
+</html>
