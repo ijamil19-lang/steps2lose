@@ -8,6 +8,7 @@
   <meta name="description" content="Start your free 30-Day Step2Lose walking challenge, track your daily target and build a consistent walking habit.">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -551,7 +552,7 @@ function saveChallenge(data) {
 
 }
 
-/* SHARE CHALLENGE PROGRESS */
+/* SHARE CHALLENGE PROGRESS AS IMAGE */
 
 document
   .getElementById("share-progress")
@@ -563,6 +564,16 @@ document
       alert("Start your 30-day challenge first.");
       return;
     }
+
+    const shareButton =
+      document.getElementById("share-progress");
+
+    const originalButtonText =
+      shareButton.textContent;
+
+    shareButton.disabled = true;
+    shareButton.textContent =
+      "Creating your progress card...";
 
     const daysComplete =
       challenge.completedDates.length;
@@ -584,42 +595,112 @@ document
 Small steps. Real progress.
 https://www.step2lose.com`;
 
-    if (navigator.share) {
+    try {
 
-      try {
+      const card =
+        document.getElementById("share-card");
+
+      const canvas =
+        await html2canvas(card, {
+          scale: 2,
+          backgroundColor: null,
+          useCORS: true
+        });
+
+      const blob =
+        await new Promise(resolve =>
+          canvas.toBlob(resolve, "image/png")
+        );
+
+      if (!blob) {
+        throw new Error("Image could not be created.");
+      }
+
+      const file =
+        new File(
+          [blob],
+          "step2lose-progress.png",
+          { type: "image/png" }
+        );
+
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+
+        await navigator.share({
+          title: "My Step2Lose Progress",
+          text: shareText,
+          files: [file]
+        });
+
+      } else if (navigator.share) {
 
         await navigator.share({
           title: "My Step2Lose Progress",
           text: shareText
         });
 
-      } catch (error) {
-        // User may have closed the share menu.
-      }
+      } else {
 
-    } else {
+        const downloadLink =
+          document.createElement("a");
 
-      try {
+        downloadLink.href =
+          canvas.toDataURL("image/png");
 
-        await navigator.clipboard.writeText(
-          shareText
-        );
+        downloadLink.download =
+          "step2lose-progress.png";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+
+        try {
+          await navigator.clipboard.writeText(shareText);
+        } catch (error) {}
 
         alert(
-          "Your Step2Lose progress has been copied. You can now paste it into WhatsApp, Facebook or anywhere else."
+          "Your Step2Lose progress card has been saved as an image. The progress text was also copied where supported."
         );
-
-      } catch (error) {
-
-        alert(
-          "Sharing is not supported by this browser."
-        );
-
       }
 
+    } catch (error) {
+
+      if (error && error.name === "AbortError") {
+        // User closed the share menu.
+      } else {
+
+        try {
+
+          if (navigator.share) {
+            await navigator.share({
+              title: "My Step2Lose Progress",
+              text: shareText
+            });
+          } else {
+            await navigator.clipboard.writeText(shareText);
+            alert(
+              "Image sharing is not supported here, so your Step2Lose progress text has been copied instead."
+            );
+          }
+
+        } catch (fallbackError) {
+          // User may have closed the share menu.
+        }
+      }
+
+    } finally {
+
+      shareButton.disabled = false;
+      shareButton.textContent =
+        originalButtonText;
     }
 
   });
+
+
 function calculateStreak(completedDates) {
 
   if (!completedDates.length) {
