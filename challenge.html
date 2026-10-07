@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>30-Day Walking Challenge | Step2Lose</title>
+  <meta name="description" content="Start your free 30-Day Step2Lose walking challenge, track your daily target and build a consistent walking habit.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(249,115,22,.18), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(59,130,246,.18), transparent 35%),
+        linear-gradient(135deg,#0f172a,#111827);
+    }
+
+    .day-complete {
+      background: #ecfdf5;
+      border-color: #10b981;
+      color: #047857;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<header class="hero text-white">
+
+  <nav class="max-w-6xl mx-auto px-5 py-6 flex justify-between items-center">
+
+    <a href="index.html" class="text-2xl font-extrabold">
+      STEP<span class="text-blue-400">2</span>LOSE
+    </a>
+
+    <div class="flex gap-5 text-sm">
+      <a href="index.html" class="text-slate-300 hover:text-white">
+        Calculator
+      </a>
+
+      <a href="healthy-eating.html" class="text-slate-300 hover:text-white">
+        Healthy Eating
+      </a>
+    </div>
+
+  </nav>
+
+
+  <div class="max-w-3xl mx-auto px-5 text-center pt-10 pb-20">
+
+    <div class="inline-flex px-4 py-2 rounded-full bg-white/10 border border-white/10 text-orange-200 text-sm">
+      🔥 Build the habit
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold mt-6">
+      30-Day Step2Lose Challenge
+    </h1>
+
+    <p class="text-slate-300 text-lg mt-5">
+      Set your extra daily step target, complete each day and build your streak.
+    </p>
+
+  </div>
+
+</header>
+
+
+<main class="max-w-5xl mx-auto px-4 sm:px-6 pb-20">
+
+  <section class="-mt-10 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 sm:p-9">
+
+    <!-- SETUP -->
+
+    <div id="setup-section" class="max-w-xl mx-auto">
+
+      <div class="text-center">
+
+        <p class="text-orange-600 uppercase tracking-widest text-sm font-bold">
+          Start Here
+        </p>
+
+        <h2 class="text-3xl font-extrabold mt-2">
+          Set Your Daily Target
+        </h2>
+
+        <p class="text-slate-500 mt-3">
+          Enter the number of extra steps you want to complete each day.
+        </p>
+
+      </div>
+
+
+      <div class="mt-8">
+
+        <label for="step-target" class="block font-semibold mb-2">
+          Extra steps per day
+        </label>
+
+        <input
+          id="step-target"
+          type="number"
+          min="1"
+          placeholder="e.g. 4924"
+          class="w-full border border-slate-300 rounded-xl p-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+      </div>
+
+
+      <button
+        id="start-btn"
+        class="w-full mt-5 bg-orange-500 hover:bg-orange-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg transition">
+
+        🔥 Start My 30-Day Challenge
+
+      </button>
+
+
+      <p class="text-xs text-center text-slate-400 mt-4">
+        Your challenge progress is saved on this browser.
+      </p>
+
+    </div>
+
+
+    <!-- ACTIVE CHALLENGE -->
+
+    <div id="challenge-section" class="hidden">
+
+      <div class="text-center">
+
+        <p class="text-orange-600 uppercase tracking-widest text-sm font-bold">
+          Your Challenge
+        </p>
+
+        <h2 class="text-3xl font-extrabold mt-2">
+          Keep Moving 👟
+        </h2>
+
+        <p class="text-slate-500 mt-3">
+          Your daily target
+        </p>
+
+        <div class="text-5xl font-extrabold mt-3">
+          <span id="daily-target">0</span>
+        </div>
+
+        <div class="text-slate-500 font-semibold mt-1">
+          extra steps/day
+        </div>
+
+      </div>
+
+
+      <!-- STATS -->
+
+      <div class="grid grid-cols-3 gap-3 mt-9">
+
+        <div class="bg-blue-50 rounded-2xl p-4 text-center">
+
+          <div class="text-2xl">📅</div>
+
+          <div id="completed-count" class="font-extrabold text-2xl mt-1">
+            0
+          </div>
+
+          <div class="text-xs text-slate-500">
+            Days Complete
+          </div>
+
+        </div>
+
+
+        <div class="bg-orange-50 rounded-2xl p-4 text-center">
+
+          <div class="text-2xl">🔥</div>
+
+          <div id="streak-count" class="font-extrabold text-2xl mt-1">
+            0
+          </div>
+
+          <div class="text-xs text-slate-500">
+            Current Streak
+          </div>
+
+        </div>
+
+
+        <div class="bg-emerald-50 rounded-2xl p-4 text-center">
+
+          <div class="text-2xl">👟</div>
+
+          <div id="total-steps" class="font-extrabold text-xl sm:text-2xl mt-1">
+            0
+          </div>
+
+          <div class="text-xs text-slate-500">
+            Extra Steps
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROGRESS -->
+
+      <div class="mt-8">
+
+        <div class="flex justify-between text-sm font-semibold mb-2">
+
+          <span>30-Day Progress</span>
+
+          <span id="progress-text">
+            0%
+          </span>
+
+        </div>
+
+        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+
+          <div
+            id="progress-bar"
+            class="bg-emerald-500 h-3 rounded-full transition-all duration-500"
+            style="width:0%">
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- TODAY -->
+
+      <div class="mt-8 bg-slate-900 text-white rounded-3xl p-6 text-center">
+
+        <p class="text-slate-400 text-sm">
+          Today's Goal
+        </p>
+
+        <div class="text-3xl font-extrabold mt-2">
+          <span id="today-target">0</span> extra steps
+        </div>
+
+        <button
+          id="complete-today-btn"
+          class="mt-5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-7 py-3.5 rounded-xl transition">
+
+          ✓ Mark Today Complete
+
+        </button>
+
+        <p id="today-status"
+           class="hidden mt-4 text-emerald-400 font-semibold">
+
+          🎉 Today's target completed!
+
+        </p>
+
+      </div>
+
+
+      <!-- 30 DAYS -->
+
+      <div class="mt-10">
+
+        <h3 class="text-xl font-extrabold">
+          Your 30 Days
+        </h3>
+
+        <div
+          id="days-grid"
+          class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-2 mt-5">
+        </div>
+
+      </div>
+
+
+      <div class="mt-10 border-t border-slate-200 pt-6 text-center">
+
+        <button
+          id="reset-btn"
+          class="text-sm text-red-500 hover:text-red-700 font-semibold">
+
+          Reset Challenge
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TIPS -->
+
+  <section class="mt-14">
+
+    <div class="text-center">
+
+      <p class="text-blue-600 uppercase tracking-widest text-sm font-bold">
+        Stay Consistent
+      </p>
+
+      <h2 class="text-3xl font-extrabold mt-2">
+        Make Your Steps Easier
+      </h2>
+
+    </div>
+
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="text-3xl">🌅</div>
+        <h3 class="font-bold mt-3">Walk Earlier</h3>
+        <p class="text-sm text-slate-500 mt-2">
+          Getting some steps earlier in the day can make the target feel easier.
+        </p>
+      </div>
+
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="text-3xl">🚶</div>
+        <h3 class="font-bold mt-3">Split Your Walks</h3>
+        <p class="text-sm text-slate-500 mt-2">
+          Your steps don't need to happen in one long walk.
+        </p>
+      </div>
+
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="text-3xl">📱</div>
+        <h3 class="font-bold mt-3">Track Your Steps</h3>
+        <p class="text-sm text-slate-500 mt-2">
+          Use your phone or wearable to keep an eye on your daily movement.
+        </p>
+      </div>
+
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-5">
+        <div class="text-3xl">⭐</div>
+        <h3 class="font-bold mt-3">Aim for Consistency</h3>
+        <p class="text-sm text-slate-500 mt-2">
+          Missing one day doesn't mean the challenge has failed. Keep going.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="mt-10 bg-amber-50 border border-amber-200 rounded-2xl p-5">
+
+    <p class="text-sm text-amber-900 leading-relaxed">
+      <strong>Safety:</strong> Increase your activity gradually and choose an amount
+      appropriate for your current fitness and health. Stop exercising if you feel
+      unwell. If you have a health condition, injury, or concerns about increasing
+      your activity, seek appropriate medical advice.
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer class="bg-slate-900 text-slate-400">
+
+  <div class="max-w-6xl mx-auto px-5 py-9 text-center">
+
+    <div class="text-white font-extrabold text-xl">
+      STEP<span class="text-blue-400">2</span>LOSE
+    </div>
+
+    <p class="text-sm mt-2">
+      Small steps. Real progress.
+    </p>
+
+    <p class="text-xs text-slate-500 mt-4">
+      © 2026 Step2Lose. For informational purposes only.
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+const STORAGE_KEY = "step2loseChallenge";
+
+const setupSection =
+document.getElementById("setup-section");
+
+const challengeSection =
+document.getElementById("challenge-section");
+
+const stepTarget =
+document.getElementById("step-target");
+
+const startBtn =
+document.getElementById("start-btn");
+
+const dailyTarget =
+document.getElementById("daily-target");
+
+const todayTarget =
+document.getElementById("today-target");
+
+const completedCount =
+document.getElementById("completed-count");
+
+const streakCount =
+document.getElementById("streak-count");
+
+const totalSteps =
+document.getElementById("total-steps");
+
+const progressText =
+document.getElementById("progress-text");
+
+const progressBar =
+document.getElementById("progress-bar");
+
+const completeTodayBtn =
+document.getElementById("complete-today-btn");
+
+const todayStatus =
+document.getElementById("today-status");
+
+const daysGrid =
+document.getElementById("days-grid");
+
+const resetBtn =
+document.getElementById("reset-btn");
+
+
+function getToday() {
+
+  const now = new Date();
+
+  return (
+    now.getFullYear() +
+    "-" +
+    String(now.getMonth() + 1).padStart(2,"0") +
+    "-" +
+    String(now.getDate()).padStart(2,"0")
+  );
+
+}
+
+
+function loadChallenge() {
+
+  const saved =
+    localStorage.getItem(STORAGE_KEY);
+
+  if (!saved) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(saved);
+  } catch {
+    return null;
+  }
+
+}
+
+
+function saveChallenge(data) {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+function calculateStreak(completedDates) {
+
+  if (!completedDates.length) {
+    return 0;
+  }
+
+  const sorted =
+    [...completedDates].sort().reverse();
+
+  let streak = 1;
+
+  for (let i = 0; i < sorted.length - 1; i++) {
+
+    const current =
+      new Date(sorted[i] + "T12:00:00");
+
+    const previous =
+      new Date(sorted[i + 1] + "T12:00:00");
+
+    const difference =
+      Math.round(
+        (current - previous) /
+        (1000 * 60 * 60 * 24)
+      );
+
+    if (difference === 1) {
+      streak++;
+    } else {
+      break;
+    }
+
+  }
+
+  return streak;
+
+}
+
+
+function renderChallenge() {
+
+  const challenge =
+    loadChallenge();
+
+  if (!challenge) {
+
+    setupSection.classList.remove("hidden");
+    challengeSection.classList.add("hidden");
+
+    return;
+
+  }
+
+
+  setupSection.classList.add("hidden");
+  challengeSection.classList.remove("hidden");
+
+
+  const target =
+    Number(challenge.target);
+
+  const completed =
+    challenge.completedDates || [];
+
+
+  dailyTarget.textContent =
+    target.toLocaleString();
+
+  todayTarget.textContent =
+    target.toLocaleString();
+
+
+  completedCount.textContent =
+    completed.length;
+
+
+  streakCount.textContent =
+    calculateStreak(completed);
+
+
+  totalSteps.textContent =
+    (completed.length * target)
+    .toLocaleString();
+
+
+  const progress =
+    Math.min(
+      100,
+      Math.round(
+        (completed.length / 30) * 100
+      )
+    );
+
+
+  progressText.textContent =
+    progress + "%";
+
+  progressBar.style.width =
+    progress + "%";
+
+
+  const today =
+    getToday();
+
+  const completedToday =
+    completed.includes(today);
+
+
+  if (completedToday) {
+
+    completeTodayBtn.disabled = true;
+
+    completeTodayBtn.textContent =
+      "✓ Completed Today";
+
+    completeTodayBtn.classList.add(
+      "opacity-60",
+      "cursor-not-allowed"
+    );
+
+    todayStatus.classList.remove("hidden");
+
+  } else {
+
+    completeTodayBtn.disabled = false;
+
+    completeTodayBtn.textContent =
+      "✓ Mark Today Complete";
+
+    completeTodayBtn.classList.remove(
+      "opacity-60",
+      "cursor-not-allowed"
+    );
+
+    todayStatus.classList.add("hidden");
+
+  }
+
+
+  daysGrid.innerHTML = "";
+
+
+  for (let i = 1; i <= 30; i++) {
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "border border-slate-200 rounded-xl aspect-square flex items-center justify-center font-bold text-sm bg-white";
+
+    box.textContent =
+      i;
+
+
+    if (i <= completed.length) {
+
+      box.classList.add(
+        "day-complete"
+      );
+
+      box.innerHTML =
+        "✓";
+
+    }
+
+
+    daysGrid.appendChild(box);
+
+  }
+
+}
+
+
+startBtn.addEventListener("click", () => {
+
+  const target =
+    parseInt(stepTarget.value);
+
+  if (!target || target <= 0) {
+
+    alert(
+      "Please enter a valid daily step target."
+    );
+
+    return;
+
+  }
+
+
+  const challenge = {
+
+    target: target,
+
+    startDate: getToday(),
+
+    completedDates: []
+
+  };
+
+
+  saveChallenge(challenge);
+
+  renderChallenge();
+
+});
+
+
+completeTodayBtn.addEventListener(
+"click",
+() => {
+
+  const challenge =
+    loadChallenge();
+
+  if (!challenge) {
+    return;
+  }
+
+
+  const today =
+    getToday();
+
+
+  if (
+    !challenge.completedDates.includes(today)
+  ) {
+
+    challenge.completedDates.push(today);
+
+    saveChallenge(challenge);
+
+  }
+
+
+  renderChallenge();
+
+});
+
+
+resetBtn.addEventListener(
+"click",
+() => {
+
+  const confirmed =
+    confirm(
+      "Reset your Step2Lose challenge? Your saved progress on this browser will be deleted."
+    );
+
+
+  if (confirmed) {
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    stepTarget.value = "";
+
+    renderChallenge();
+
+  }
+
+});
+
+
+/* RECEIVE TARGET FROM CALCULATOR LATER */
+
+const params =
+new URLSearchParams(window.location.search);
+
+const targetFromCalculator =
+parseInt(params.get("steps"));
+
+
+if (
+  targetFromCalculator > 0 &&
+  !loadChallenge()
+) {
+
+  stepTarget.value =
+    targetFromCalculator;
+
+}
+
+
+renderChallenge();
+
+</script>
+
+</body>
+</html>
