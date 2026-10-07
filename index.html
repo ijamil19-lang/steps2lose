@@ -293,15 +293,27 @@
 
           </div>
 <!-- HEALTHY EATING CTA -->
+<!-- ACTION BUTTONS -->
 <div class="mt-5 text-center">
-  <a href="healthy-eating.html"
-     class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
-    🥗 View Healthy Meal Ideas →
-  </a>
 
-  <p class="text-xs text-slate-500 mt-2">
-    Explore our 7-day Balanced and South Asian healthy eating plans.
+  <div class="flex flex-col sm:flex-row gap-3 justify-center">
+
+    <button id="challenge-btn"
+       class="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
+      🔥 Start My 30-Day Challenge →
+    </button>
+
+    <a href="healthy-eating.html"
+       class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
+      🥗 View Healthy Meal Ideas →
+    </a>
+
+  </div>
+
+  <p class="text-xs text-slate-500 mt-3">
+    Build consistency with a 30-day walking challenge or explore healthy meal ideas.
   </p>
+
 </div>
           <!-- DISCLAIMER -->
           <div class="mt-5 bg-amber-50 border border-amber-100 rounded-xl p-4">
@@ -620,7 +632,15 @@
 
         const roundedSteps =
           Math.round(additionalDailySteps);
+/* SEND CALCULATED TARGET TO 30-DAY CHALLENGE */
 
+const challengeBtn =
+  document.getElementById('challenge-btn');
+
+challengeBtn.onclick = function() {
+  window.location.href =
+    'challenge.html?steps=' + roundedSteps;
+};
 
         /* ADDITIONAL PLAN INFORMATION */
 
