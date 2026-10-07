@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Weight & Steps Progress Tracker | Step2Lose</title>
+
+  <meta name="description"
+        content="Track your weight, daily steps and progress with the free Step2Lose Progress Tracker.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<!-- HEADER -->
+<header class="bg-slate-950 text-white">
+  <div class="max-w-6xl mx-auto px-5 py-5 flex justify-between items-center">
+
+    <a href="index.html" class="text-2xl font-black tracking-tight">
+      STEP<span class="text-blue-400">2</span>LOSE
+    </a>
+
+    <div class="flex gap-4 text-sm">
+      <a href="index.html" class="text-slate-300 hover:text-white">
+        Calculator
+      </a>
+
+      <a href="challenge.html" class="text-slate-300 hover:text-white">
+        Challenge
+      </a>
+
+      <a href="healthy-eating.html" class="text-slate-300 hover:text-white">
+        Healthy Eating
+      </a>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white">
+
+  <div class="max-w-4xl mx-auto px-5 py-14 text-center">
+
+    <div class="text-blue-300 font-semibold mb-3">
+      STEP2LOSE PROGRESS
+    </div>
+
+    <h1 class="text-4xl md:text-5xl font-black">
+      Track Your Progress
+    </h1>
+
+    <p class="mt-4 text-slate-300 text-lg max-w-2xl mx-auto">
+      Record your weight and daily steps and watch your progress build over time.
+    </p>
+
+    <div class="mt-5 text-sm text-slate-400">
+      🔒 Your entries stay in this browser on this device.
+    </div>
+
+  </div>
+
+</section>
+
+
+<main class="max-w-5xl mx-auto px-5 py-10">
+
+
+<!-- ADD ENTRY -->
+<section class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-8">
+
+  <h2 class="text-2xl font-black">
+    Add Today's Progress
+  </h2>
+
+  <p class="text-slate-500 mt-2">
+    Enter your weight and total steps for the day.
+  </p>
+
+
+  <div class="grid md:grid-cols-3 gap-4 mt-6">
+
+    <!-- DATE -->
+    <div>
+      <label class="block text-sm font-semibold mb-2">
+        Date
+      </label>
+
+      <input id="entry-date"
+             type="date"
+             class="w-full border border-slate-300 rounded-xl px-4 py-3">
+    </div>
+
+
+    <!-- WEIGHT -->
+    <div>
+
+      <div class="flex justify-between items-center mb-2">
+
+        <label class="text-sm font-semibold">
+          Weight
+        </label>
+
+        <select id="weight-unit"
+                class="text-sm border border-slate-300 rounded-lg px-2 py-1">
+
+          <option value="kg">kg</option>
+          <option value="lbs">lbs</option>
+
+        </select>
+
+      </div>
+
+      <input id="entry-weight"
+             type="number"
+             min="1"
+             step="0.1"
+             placeholder="e.g. 95"
+             class="w-full border border-slate-300 rounded-xl px-4 py-3">
+
+    </div>
+
+
+    <!-- STEPS -->
+    <div>
+
+      <label class="block text-sm font-semibold mb-2">
+        Total Steps
+      </label>
+
+      <input id="entry-steps"
+             type="number"
+             min="0"
+             step="1"
+             placeholder="e.g. 8500"
+             class="w-full border border-slate-300 rounded-xl px-4 py-3">
+
+    </div>
+
+  </div>
+
+
+  <button id="save-entry"
+          class="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition">
+
+    Save Today's Progress →
+
+  </button>
+
+  <p id="message"
+     class="hidden text-center text-sm mt-4 font-semibold">
+  </p>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="mt-8">
+
+  <h2 class="text-2xl font-black mb-5">
+    Your Progress
+  </h2>
+
+  <div class="grid sm:grid-cols-3 gap-4">
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 text-center">
+
+      <div class="text-sm text-slate-500">
+        Entries
+      </div>
+
+      <div id="total-entries"
+           class="text-3xl font-black mt-1">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 text-center">
+
+      <div class="text-sm text-slate-500">
+        Weight Change
+      </div>
+
+      <div id="weight-change"
+           class="text-3xl font-black mt-1">
+        —
+      </div>
+
+    </div>
+
+
+    <div class="bg-white border border-slate-200 rounded-2xl p-5 text-center">
+
+      <div class="text-sm text-slate-500">
+        Latest Steps
+      </div>
+
+      <div id="latest-steps"
+           class="text-3xl font-black mt-1">
+        —
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- HISTORY -->
+<section class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-8 mt-8">
+
+  <div class="flex justify-between items-center gap-4">
+
+    <div>
+      <h2 class="text-2xl font-black">
+        Progress History
+      </h2>
+
+      <p class="text-sm text-slate-500 mt-1">
+        Your most recent entries appear first.
+      </p>
+    </div>
+
+    <button id="clear-all"
+            class="text-sm text-red-600 hover:text-red-700 font-semibold">
+      Clear All
+    </button>
+
+  </div>
+
+
+  <div id="empty-state"
+       class="text-center py-12 text-slate-400">
+
+    <div class="text-4xl mb-3">📊</div>
+
+    <p>
+      No progress recorded yet.
+    </p>
+
+  </div>
+
+
+  <div id="history-list"
+       class="mt-6 space-y-3">
+  </div>
+
+</section>
+
+
+<!-- MOTIVATION -->
+<section class="bg-slate-950 text-white rounded-3xl p-8 mt-8 text-center">
+
+  <div class="text-4xl">
+    👟
+  </div>
+
+  <h2 class="text-2xl font-black mt-3">
+    Progress Comes From Consistency
+  </h2>
+
+  <p class="text-slate-300 mt-3 max-w-xl mx-auto">
+    Daily weight can naturally fluctuate. Focus on your longer-term
+    direction and the healthy habits you are building.
+  </p>
+
+  <a href="challenge.html"
+     class="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl">
+
+    🔥 View My 30-Day Challenge →
+
+  </a>
+
+</section>
+
+
+<!-- DISCLAIMER -->
+<section class="mt-8 text-xs text-slate-500 leading-6">
+
+  <strong>Important:</strong>
+  This tracker is for general personal tracking only and does not provide
+  medical advice. Weight can fluctuate for many reasons. If you have concerns
+  about unexplained weight changes or your health, speak to an appropriate
+  healthcare professional.
+
+</section>
+
+</main>
+
+
+<footer class="border-t border-slate-200 mt-10">
+
+  <div class="max-w-5xl mx-auto px-5 py-8 text-center text-sm text-slate-500">
+
+    <div class="font-bold text-slate-700">
+      STEP<span class="text-blue-500">2</span>LOSE
+    </div>
+
+    <p class="mt-2">
+      Small steps. Real progress.
+    </p>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+const STORAGE_KEY = "step2loseProgress";
+
+const dateInput =
+  document.getElementById("entry-date");
+
+const weightInput =
+  document.getElementById("entry-weight");
+
+const stepsInput =
+  document.getElementById("entry-steps");
+
+const unitInput =
+  document.getElementById("weight-unit");
+
+const message =
+  document.getElementById("message");
+
+
+/* TODAY'S DATE */
+
+function getToday() {
+
+  const now = new Date();
+
+  const year = now.getFullYear();
+
+  const month =
+    String(now.getMonth() + 1).padStart(2, "0");
+
+  const day =
+    String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+
+}
+
+dateInput.value = getToday();
+
+
+/* LOAD DATA */
+
+function loadEntries() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    ) || [];
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+/* SAVE DATA */
+
+function saveEntries(entries) {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(entries)
+  );
+
+}
+
+
+/* FORMAT NUMBER */
+
+function formatNumber(number) {
+
+  return Number(number).toLocaleString();
+
+}
+
+
+/* SAVE ENTRY */
+
+document
+  .getElementById("save-entry")
+  .addEventListener("click", function() {
+
+    const date =
+      dateInput.value;
+
+    const weight =
+      parseFloat(weightInput.value);
+
+    const steps =
+      parseInt(stepsInput.value);
+
+    const unit =
+      unitInput.value;
+
+
+    if (
+      !date ||
+      !weight ||
+      weight <= 0 ||
+      isNaN(steps) ||
+      steps < 0
+    ) {
+
+      message.textContent =
+        "Please enter a valid date, weight and step count.";
+
+      message.className =
+        "text-center text-sm mt-4 font-semibold text-red-600";
+
+      return;
+
+    }
+
+
+    let entries =
+      loadEntries();
+
+
+    /* One entry per date.
+       Saving again updates that date. */
+
+    const existingIndex =
+      entries.findIndex(
+        entry => entry.date === date
+      );
+
+
+    const newEntry = {
+      date,
+      weight,
+      unit,
+      steps
+    };
+
+
+    if (existingIndex >= 0) {
+
+      entries[existingIndex] =
+        newEntry;
+
+      message.textContent =
+        "Today's progress has been updated. ✓";
+
+    } else {
+
+      entries.push(newEntry);
+
+      message.textContent =
+        "Progress saved. Great work! ✓";
+
+    }
+
+
+    saveEntries(entries);
+
+    message.className =
+      "text-center text-sm mt-4 font-semibold text-emerald-600";
+
+
+    weightInput.value = "";
+    stepsInput.value = "";
+
+    renderProgress();
+
+  });
+
+
+/* DELETE ONE ENTRY */
+
+function deleteEntry(date) {
+
+  let entries =
+    loadEntries();
+
+  entries =
+    entries.filter(
+      entry => entry.date !== date
+    );
+
+  saveEntries(entries);
+
+  renderProgress();
+
+}
+
+
+/* CLEAR ALL */
+
+document
+  .getElementById("clear-all")
+  .addEventListener("click", function() {
+
+    const entries =
+      loadEntries();
+
+    if (entries.length === 0) {
+      return;
+    }
+
+    const confirmed =
+      confirm(
+        "Delete all your Step2Lose progress history?"
+      );
+
+    if (!confirmed) {
+      return;
+    }
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+    renderProgress();
+
+  });
+
+
+/* RENDER */
+
+function renderProgress() {
+
+  const entries =
+    loadEntries()
+      .sort(
+        (a, b) =>
+          new Date(a.date) -
+          new Date(b.date)
+      );
+
+
+  const totalEntries =
+    document.getElementById(
+      "total-entries"
+    );
+
+  const weightChange =
+    document.getElementById(
+      "weight-change"
+    );
+
+  const latestSteps =
+    document.getElementById(
+      "latest-steps"
+    );
+
+  const historyList =
+    document.getElementById(
+      "history-list"
+    );
+
+  const emptyState =
+    document.getElementById(
+      "empty-state"
+    );
+
+
+  totalEntries.textContent =
+    entries.length;
+
+
+  if (entries.length === 0) {
+
+    weightChange.textContent =
+      "—";
+
+    latestSteps.textContent =
+      "—";
+
+    historyList.innerHTML =
+      "";
+
+    emptyState.classList.remove(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+
+  emptyState.classList.add(
+    "hidden"
+  );
+
+
+  const first =
+    entries[0];
+
+  const latest =
+    entries[
+      entries.length - 1
+    ];
+
+
+  latestSteps.textContent =
+    formatNumber(latest.steps);
+
+
+  /*
+    Weight change is only calculated
+    when the first and latest entries
+    use the same unit.
+  */
+
+  if (first.unit === latest.unit) {
+
+    const change =
+      latest.weight -
+      first.weight;
+
+    const sign =
+      change > 0 ? "+" : "";
+
+    weightChange.textContent =
+      `${sign}${change.toFixed(1)} ${latest.unit}`;
+
+  } else {
+
+    weightChange.textContent =
+      "Mixed units";
+
+  }
+
+
+  const newestFirst =
+    [...entries].reverse();
+
+
+  historyList.innerHTML =
+    newestFirst
+      .map(entry => {
+
+        const readableDate =
+          new Date(
+            entry.date + "T00:00:00"
+          ).toLocaleDateString(
+            undefined,
+            {
+              day: "numeric",
+              month: "short",
+              year: "numeric"
+            }
+          );
+
+
+        return `
+          <div class="flex items-center justify-between gap-4 border border-slate-200 rounded-2xl p-4">
+
+            <div>
+
+              <div class="font-bold">
+                ${readableDate}
+              </div>
+
+              <div class="text-sm text-slate-500 mt-1">
+                ${entry.weight} ${entry.unit}
+                ·
+                ${formatNumber(entry.steps)} steps
+              </div>
+
+            </div>
+
+            <button
+              onclick="deleteEntry('${entry.date}')"
+              class="text-red-500 hover:text-red-700 text-sm font-semibold">
+
+              Delete
+
+            </button>
+
+          </div>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* INITIAL LOAD */
+
+renderProgress();
+
+</script>
+
+</body>
+</html>
