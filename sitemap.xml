@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.step2lose.com/</loc></url>
-  <url><loc>https://www.step2lose.com/challenge.html</loc></url>
-  <url><loc>https://www.step2lose.com/progress.html</loc></url>
-  <url><loc>https://www.step2lose.com/healthy-eating.html</loc></url>
-  <url><loc>https://www.step2lose.com/health-guide.html</loc></url>
+  <url>
+    <loc>https://www.step2lose.com/</loc>
+  </url>
+  <url>
+    <loc>https://www.step2lose.com/challenge.html</loc>
+  </url>
+  <url>
+    <loc>https://www.step2lose.com/progress.html</loc>
+  </url>
+  <url>
+    <loc>https://www.step2lose.com/healthy-eating.html</loc>
+  </url>
+  <url>
+    <loc>https://www.step2lose.com/health-guide.html</loc>
+  </url>
+  <url>
+    <loc>https://www.step2lose.com/how-many-steps-a-day-to-lose-weight.html</loc>
+  </url>
 </urlset>
