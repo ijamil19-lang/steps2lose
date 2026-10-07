@@ -270,10 +270,69 @@
         class="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition">
   📤 Share My Progress
 </button>
+
       </div>
 
 
-      <!-- 30 DAYS -->
+        <!-- VISUAL PROGRESS CARD -->
+<div id="share-card"
+     class="mt-5 bg-gradient-to-br from-blue-600 via-blue-700 to-slate-900 text-white rounded-3xl p-6 text-center shadow-xl">
+
+  <div class="text-sm font-bold tracking-widest text-blue-200">
+    STEP2LOSE
+  </div>
+
+  <div class="text-4xl mt-3">
+    🔥
+  </div>
+
+  <h3 class="text-2xl font-black mt-2">
+    My 30-Day Challenge
+  </h3>
+
+  <div class="grid grid-cols-3 gap-2 mt-6">
+
+    <div class="bg-white/10 rounded-xl p-3">
+      <div id="card-days" class="text-2xl font-black">
+        0
+      </div>
+      <div class="text-xs text-blue-100 mt-1">
+        Days
+      </div>
+    </div>
+
+    <div class="bg-white/10 rounded-xl p-3">
+      <div id="card-streak" class="text-2xl font-black">
+        0
+      </div>
+      <div class="text-xs text-blue-100 mt-1">
+        Streak
+      </div>
+    </div>
+
+    <div class="bg-white/10 rounded-xl p-3">
+      <div id="card-steps" class="text-2xl font-black">
+        0
+      </div>
+      <div class="text-xs text-blue-100 mt-1">
+        Extra Steps
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-6 text-sm text-blue-100">
+    Small steps. Real progress.
+  </div>
+
+  <div class="font-bold mt-1">
+    step2lose.com
+  </div>
+
+</div>
+
+
+            <!-- 30 DAYS -->
 
       <div class="mt-10">
 
@@ -643,6 +702,34 @@ function renderChallenge() {
   totalSteps.textContent =
     (completed.length * target)
     .toLocaleString();
+
+
+  /* UPDATE VISUAL PROGRESS CARD */
+
+  const cardDays =
+    document.getElementById("card-days");
+
+  const cardStreak =
+    document.getElementById("card-streak");
+
+  const cardSteps =
+    document.getElementById("card-steps");
+
+  if (cardDays) {
+    cardDays.textContent =
+      completed.length;
+  }
+
+  if (cardStreak) {
+    cardStreak.textContent =
+      calculateStreak(completed);
+  }
+
+  if (cardSteps) {
+    cardSteps.textContent =
+      (completed.length * target)
+      .toLocaleString();
+  }
 
 
   const progress =
