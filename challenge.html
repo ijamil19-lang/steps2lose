@@ -265,7 +265,11 @@
           🎉 Today's target completed!
 
         </p>
-
+<!-- SHARE PROGRESS -->
+<button id="share-progress"
+        class="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition">
+  📤 Share My Progress
+</button>
       </div>
 
 
@@ -488,7 +492,75 @@ function saveChallenge(data) {
 
 }
 
+/* SHARE CHALLENGE PROGRESS */
 
+document
+  .getElementById("share-progress")
+  .addEventListener("click", async function() {
+
+    const challenge = loadChallenge();
+
+    if (!challenge) {
+      alert("Start your 30-day challenge first.");
+      return;
+    }
+
+    const daysComplete =
+      challenge.completedDates.length;
+
+    const streak =
+      calculateStreak(challenge.completedDates);
+
+    const totalExtraSteps =
+      daysComplete * challenge.target;
+
+    const shareText =
+`🔥 My Step2Lose Progress
+
+👟 Daily target: ${challenge.target.toLocaleString()} extra steps
+📅 ${daysComplete} of 30 days completed
+🔥 Current streak: ${streak} day${streak === 1 ? "" : "s"}
+🚶 ${totalExtraSteps.toLocaleString()} extra steps completed
+
+Small steps. Real progress.
+https://www.step2lose.com`;
+
+    if (navigator.share) {
+
+      try {
+
+        await navigator.share({
+          title: "My Step2Lose Progress",
+          text: shareText
+        });
+
+      } catch (error) {
+        // User may have closed the share menu.
+      }
+
+    } else {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          shareText
+        );
+
+        alert(
+          "Your Step2Lose progress has been copied. You can now paste it into WhatsApp, Facebook or anywhere else."
+        );
+
+      } catch (error) {
+
+        alert(
+          "Sharing is not supported by this browser."
+        );
+
+      }
+
+    }
+
+  });
 function calculateStreak(completedDates) {
 
   if (!completedDates.length) {
