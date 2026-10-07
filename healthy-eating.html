@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Healthy Eating Plan | Step2Lose</title>
+  <meta name="description" content="Simple healthy eating ideas and a 7-day balanced meal plan from Step2Lose. Includes balanced and South Asian meal ideas.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(16,185,129,.18), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(59,130,246,.15), transparent 35%),
+        linear-gradient(135deg,#0f172a,#111827);
+    }
+
+    .plan-btn.active {
+      background: #059669;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+  <!-- HEADER -->
+  <header class="hero text-white">
+
+    <nav class="max-w-6xl mx-auto px-5 py-6 flex justify-between items-center">
+
+      <a href="index.html" class="text-2xl font-extrabold">
+        STEP<span class="text-blue-400">2</span>LOSE
+      </a>
+
+      <a href="index.html"
+         class="text-sm text-slate-300 hover:text-white">
+        ← Step Calculator
+      </a>
+
+    </nav>
+
+    <div class="max-w-3xl mx-auto text-center px-5 pt-10 pb-20">
+
+      <div class="inline-block bg-white/10 border border-white/10 rounded-full px-4 py-2 text-sm text-emerald-200">
+        🥗 Healthy Eating
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl font-extrabold mt-6">
+        Eat Better Without Making It Complicated
+      </h1>
+
+      <p class="text-slate-300 text-lg mt-5 leading-relaxed">
+        Simple meal ideas to support a balanced lifestyle alongside your
+        Step2Lose walking plan.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
+
+    <!-- PRINCIPLES -->
+    <section class="-mt-9 bg-white rounded-3xl shadow-xl border border-slate-200 p-6 sm:p-9">
+
+      <div class="text-center">
+
+        <p class="text-emerald-600 font-bold uppercase tracking-widest text-sm">
+          Start Here
+        </p>
+
+        <h2 class="text-3xl font-extrabold mt-2">
+          Keep Healthy Eating Simple
+        </h2>
+
+      </div>
+
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+
+        <div class="bg-emerald-50 rounded-2xl p-5">
+          <div class="text-3xl">🥦</div>
+          <h3 class="font-bold mt-3">More Vegetables</h3>
+          <p class="text-sm text-slate-600 mt-2">
+            Include vegetables or salad with your main meals whenever practical.
+          </p>
+        </div>
+
+
+        <div class="bg-blue-50 rounded-2xl p-5">
+          <div class="text-3xl">🍗</div>
+          <h3 class="font-bold mt-3">Include Protein</h3>
+          <p class="text-sm text-slate-600 mt-2">
+            Choose foods such as chicken, fish, eggs, beans, lentils or yoghurt.
+          </p>
+        </div>
+
+
+        <div class="bg-amber-50 rounded-2xl p-5">
+          <div class="text-3xl">🌾</div>
+          <h3 class="font-bold mt-3">Choose Better Carbs</h3>
+          <p class="text-sm text-slate-600 mt-2">
+            Try wholegrain bread, oats, potatoes, brown rice or wholemeal roti.
+          </p>
+        </div>
+
+
+        <div class="bg-cyan-50 rounded-2xl p-5">
+          <div class="text-3xl">💧</div>
+          <h3 class="font-bold mt-3">Stay Hydrated</h3>
+          <p class="text-sm text-slate-600 mt-2">
+            Water is an easy everyday choice. Limit frequent sugary drinks.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PLAN -->
+    <section class="mt-16">
+
+      <div class="text-center">
+
+        <p class="text-emerald-600 font-bold uppercase tracking-widest text-sm">
+          Meal Ideas
+        </p>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold mt-2">
+          7-Day Healthy Eating Plan
+        </h2>
+
+        <p class="text-slate-500 mt-3">
+          Choose the style that suits you.
+        </p>
+
+      </div>
+
+
+      <!-- PLAN SELECTOR -->
+      <div class="max-w-xl mx-auto mt-7 bg-white rounded-xl border border-slate-200 p-1 grid grid-cols-2">
+
+        <button id="balanced-btn"
+                class="plan-btn active rounded-lg py-3 px-2 font-semibold">
+          Balanced
+        </button>
+
+        <button id="southasian-btn"
+                class="plan-btn rounded-lg py-3 px-2 font-semibold text-slate-600">
+          South Asian
+        </button>
+
+      </div>
+
+
+      <!-- BALANCED PLAN -->
+      <div id="balanced-plan" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+
+      </div>
+
+
+      <!-- SOUTH ASIAN PLAN -->
+      <div id="southasian-plan"
+           class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+
+      </div>
+
+    </section>
+
+
+    <!-- SMART SWAPS -->
+    <section class="mt-16 bg-slate-900 text-white rounded-3xl p-6 sm:p-10">
+
+      <div class="max-w-3xl">
+
+        <p class="text-emerald-400 font-bold uppercase tracking-widest text-sm">
+          Small Changes
+        </p>
+
+        <h2 class="text-3xl font-extrabold mt-2">
+          Try Simple Food Swaps
+        </h2>
+
+        <p class="text-slate-300 mt-3">
+          You don't necessarily need a completely different diet.
+          Small changes to foods you already eat can make healthy eating easier to maintain.
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 gap-4 mt-8">
+
+        <div class="bg-white/10 rounded-2xl p-5">
+          <div class="text-sm text-slate-400">Instead of</div>
+          <div class="font-bold mt-1">Sugary soft drink</div>
+
+          <div class="text-emerald-400 mt-3">Try ↓</div>
+
+          <div class="font-bold mt-1">
+            Water or a no-added-sugar alternative
+          </div>
+        </div>
+
+
+        <div class="bg-white/10 rounded-2xl p-5">
+          <div class="text-sm text-slate-400">Instead of</div>
+          <div class="font-bold mt-1">Large fried side</div>
+
+          <div class="text-emerald-400 mt-3">Try ↓</div>
+
+          <div class="font-bold mt-1">
+            Smaller portion with vegetables or salad
+          </div>
+        </div>
+
+
+        <div class="bg-white/10 rounded-2xl p-5">
+          <div class="text-sm text-slate-400">Instead of</div>
+          <div class="font-bold mt-1">Heavy creamy sauce</div>
+
+          <div class="text-emerald-400 mt-3">Try ↓</div>
+
+          <div class="font-bold mt-1">
+            Tomato, yoghurt or vegetable-based sauce
+          </div>
+        </div>
+
+
+        <div class="bg-white/10 rounded-2xl p-5">
+          <div class="text-sm text-slate-400">Instead of</div>
+          <div class="font-bold mt-1">Mindless evening snacking</div>
+
+          <div class="text-emerald-400 mt-3">Try ↓</div>
+
+          <div class="font-bold mt-1">
+            Fruit, yoghurt or a planned portion
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PORTION GUIDE -->
+    <section class="mt-16">
+
+      <div class="text-center">
+
+        <p class="text-blue-600 font-bold uppercase tracking-widest text-sm">
+          Easy Guide
+        </p>
+
+        <h2 class="text-3xl font-extrabold mt-2">
+          Build a Balanced Plate
+        </h2>
+
+      </div>
+
+
+      <div class="max-w-3xl mx-auto mt-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8">
+
+        <div class="grid sm:grid-cols-3 gap-5 text-center">
+
+          <div>
+            <div class="text-4xl">🥦</div>
+            <div class="font-extrabold text-xl mt-2">
+              Plenty
+            </div>
+            <div class="text-sm text-slate-500 mt-1">
+              Vegetables & salad
+            </div>
+          </div>
+
+
+          <div>
+            <div class="text-4xl">🍗</div>
+            <div class="font-extrabold text-xl mt-2">
+              Protein
+            </div>
+            <div class="text-sm text-slate-500 mt-1">
+              Chicken, fish, eggs, beans or lentils
+            </div>
+          </div>
+
+
+          <div>
+            <div class="text-4xl">🥔</div>
+            <div class="font-extrabold text-xl mt-2">
+              Starchy Foods
+            </div>
+            <div class="text-sm text-slate-500 mt-1">
+              Prefer higher-fibre choices when possible
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- IMPORTANT -->
+    <section class="mt-12 max-w-4xl mx-auto">
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5">
+
+        <h3 class="font-bold text-amber-900">
+          Important
+        </h3>
+
+        <p class="text-sm text-amber-900 mt-2 leading-relaxed">
+          These are general healthy meal ideas, not an individual medical diet or
+          prescribed calorie plan. Your nutritional needs can vary based on your
+          age, sex, body size, activity, health conditions, medications and other
+          factors. If you are pregnant, have a medical condition, have a history
+          of an eating disorder, or need an individual diet plan, speak with an
+          appropriate healthcare professional or registered dietitian.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="mt-14 text-center">
+
+      <h2 class="text-3xl font-extrabold">
+        Ready to Calculate Your Steps?
+      </h2>
+
+      <p class="text-slate-500 mt-3">
+        Combine healthier eating with a realistic daily walking target.
+      </p>
+
+      <a href="index.html"
+         class="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold px-7 py-4 rounded-xl shadow-lg">
+
+        Calculate My Step2Lose Plan →
+
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <footer class="bg-slate-900 text-slate-400 mt-10">
+
+    <div class="max-w-6xl mx-auto px-5 py-9 text-center">
+
+      <div class="text-white font-extrabold text-xl">
+        STEP<span class="text-blue-400">2</span>LOSE
+      </div>
+
+      <p class="text-sm mt-2">
+        Small steps. Real progress.
+      </p>
+
+      <p class="text-xs text-slate-500 mt-4">
+        © 2026 Step2Lose. For informational purposes only.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+<script>
+
+const balancedMeals = [
+
+{
+day:"Day 1",
+breakfast:"Porridge with berries and plain yoghurt",
+lunch:"Chicken salad wholegrain wrap",
+dinner:"Grilled salmon, potatoes and vegetables",
+snack:"Fruit or plain yoghurt"
+},
+
+{
+day:"Day 2",
+breakfast:"Eggs with wholegrain toast and tomatoes",
+lunch:"Tuna and bean salad",
+dinner:"Chicken stir-fry with vegetables and rice",
+snack:"Apple with a small portion of nuts"
+},
+
+{
+day:"Day 3",
+breakfast:"Plain yoghurt, oats and fruit",
+lunch:"Lentil soup with wholegrain bread",
+dinner:"Lean beef or bean chilli with rice and salad",
+snack:"Carrot and cucumber sticks"
+},
+
+{
+day:"Day 4",
+breakfast:"Porridge with banana",
+lunch:"Chicken and vegetable soup",
+dinner:"Baked fish, potatoes and mixed vegetables",
+snack:"Fruit"
+},
+
+{
+day:"Day 5",
+breakfast:"Eggs, mushrooms and wholegrain toast",
+lunch:"Wholegrain sandwich with chicken and salad",
+dinner:"Wholewheat pasta with tomato sauce, vegetables and lean protein",
+snack:"Plain yoghurt"
+},
+
+{
+day:"Day 6",
+breakfast:"Oats with milk and fruit",
+lunch:"Baked potato with beans and salad",
+dinner:"Grilled chicken, rice and vegetables",
+snack:"Fruit with a small portion of nuts"
+},
+
+{
+day:"Day 7",
+breakfast:"Eggs with wholegrain toast",
+lunch:"Vegetable and lentil soup",
+dinner:"Roast chicken, potatoes and plenty of vegetables",
+snack:"Plain yoghurt or fruit"
+}
+
+];
+
+
+const southAsianMeals = [
+
+{
+day:"Day 1",
+breakfast:"2 eggs with wholemeal roti and tomato",
+lunch:"Chicken tikka with a large salad and yoghurt",
+dinner:"Daal with 1–2 wholemeal rotis and mixed vegetables",
+snack:"Fruit or plain yoghurt"
+},
+
+{
+day:"Day 2",
+breakfast:"Porridge with milk, cinnamon and fruit",
+lunch:"Chana salad with cucumber, tomato and lemon",
+dinner:"Chicken curry made with less oil, vegetables and a moderate rice portion",
+snack:"Apple with a small portion of nuts"
+},
+
+{
+day:"Day 3",
+breakfast:"Vegetable omelette with wholemeal toast",
+lunch:"Daal soup with salad",
+dinner:"Grilled fish with 1–2 rotis and cooked vegetables",
+snack:"Plain yoghurt"
+},
+
+{
+day:"Day 4",
+breakfast:"Plain yoghurt with oats and fruit",
+lunch:"Chicken kebab with salad and wholemeal roti",
+dinner:"Mixed vegetable curry with daal and roti",
+snack:"Fruit"
+},
+
+{
+day:"Day 5",
+breakfast:"2 eggs with tomato, cucumber and wholemeal roti",
+lunch:"Chana or rajma with salad",
+dinner:"Chicken karahi prepared with less oil, roti and salad",
+snack:"Plain yoghurt or fruit"
+},
+
+{
+day:"Day 6",
+breakfast:"Porridge with banana and cinnamon",
+lunch:"Grilled chicken wrap with salad",
+dinner:"Daal, mixed sabzi and 1–2 wholemeal rotis",
+snack:"Small portion of nuts and fruit"
+},
+
+{
+day:"Day 7",
+breakfast:"Vegetable omelette with wholemeal roti",
+lunch:"Chicken tikka salad",
+dinner:"Grilled fish or chicken with rice and vegetables",
+snack:"Plain yoghurt or fruit"
+}
+
+];
+
+
+function createMealCard(meal) {
+
+return `
+<div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+
+<div class="inline-block bg-emerald-100 text-emerald-700 text-sm font-bold px-3 py-1 rounded-full">
+${meal.day}
+</div>
+
+<div class="mt-5 space-y-4">
+
+<div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Breakfast
+</div>
+<div class="font-semibold mt-1">
+${meal.breakfast}
+</div>
+</div>
+
+<div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Lunch
+</div>
+<div class="font-semibold mt-1">
+${meal.lunch}
+</div>
+</div>
+
+<div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Dinner
+</div>
+<div class="font-semibold mt-1">
+${meal.dinner}
+</div>
+</div>
+
+<div>
+<div class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Snack Idea
+</div>
+<div class="font-semibold mt-1">
+${meal.snack}
+</div>
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+
+document.getElementById("balanced-plan").innerHTML =
+balancedMeals.map(createMealCard).join("");
+
+
+document.getElementById("southasian-plan").innerHTML =
+southAsianMeals.map(createMealCard).join("");
+
+
+const balancedBtn =
+document.getElementById("balanced-btn");
+
+const southAsianBtn =
+document.getElementById("southasian-btn");
+
+const balancedPlan =
+document.getElementById("balanced-plan");
+
+const southAsianPlan =
+document.getElementById("southasian-plan");
+
+
+balancedBtn.addEventListener("click", () => {
+
+balancedPlan.classList.remove("hidden");
+
+southAsianPlan.classList.add("hidden");
+
+balancedBtn.classList.add("active");
+
+southAsianBtn.classList.remove("active");
+
+});
+
+
+southAsianBtn.addEventListener("click", () => {
+
+southAsianPlan.classList.remove("hidden");
+
+balancedPlan.classList.add("hidden");
+
+southAsianBtn.classList.add("active");
+
+balancedBtn.classList.remove("active");
+
+});
+
+</script>
+
+
+</body>
+</html>
