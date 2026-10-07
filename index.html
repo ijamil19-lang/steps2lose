@@ -56,36 +56,99 @@
   <section class="hero-bg text-white">
     <div class="max-w-6xl mx-auto px-5">
 
-      <!-- NAV -->
-      <nav class="flex items-center justify-between py-6">
-        <div class="text-2xl sm:text-3xl font-extrabold tracking-tight">
-          STEP<span class="text-blue-400">2</span>LOSE
+      <!-- NAVIGATION -->
+      <nav class="py-5">
+
+        <div class="flex items-center justify-between">
+
+          <!-- LOGO -->
+          <a href="index.html"
+             class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            STEP<span class="text-blue-400">2</span>LOSE
+          </a>
+
+          <!-- DESKTOP MENU -->
+          <div class="hidden md:flex items-center gap-5 text-sm">
+
+            <a href="index.html"
+               class="text-slate-300 hover:text-white transition">
+              Calculator
+            </a>
+
+            <a href="challenge.html"
+               class="text-slate-300 hover:text-white transition">
+              🔥 Challenge
+            </a>
+
+            <a href="progress.html"
+               class="text-slate-300 hover:text-white transition">
+              📊 Progress
+            </a>
+
+            <a href="healthy-eating.html"
+               class="text-slate-300 hover:text-white transition">
+              🥗 Healthy Eating
+            </a>
+
+            <a href="health-guide.html"
+               class="text-slate-300 hover:text-white transition">
+              ❤️ Health Guide
+            </a>
+
+          </div>
+
+          <!-- MOBILE MENU BUTTON -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="md:hidden flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/10 rounded-xl px-4 py-2 text-sm font-semibold transition">
+
+            <span id="menu-icon">☰</span>
+            <span>Menu</span>
+
+          </button>
+
         </div>
 
-       <div class="flex items-center gap-5 text-sm">
-  <a href="healthy-eating.html"
-     class="text-slate-300 hover:text-white transition">
- 🥗 Healthy Eating
-  </a>
+        <!-- MOBILE MENU -->
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden mt-4 bg-slate-900/95 border border-white/10 rounded-2xl p-3 shadow-xl">
 
-  <a href="health-guide.html"
-     class="text-slate-300 hover:text-white transition">
-  ❤️ Health Guide
-  </a>
+          <a href="index.html"
+             class="block px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10">
+            🧮 Calculator
+          </a>
 
-  <a href="progress.html"
-     class="text-slate-300 hover:text-white transition">
-    📊 Progress
-  </a>
+          <a href="challenge.html"
+             class="block px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10">
+            🔥 30-Day Challenge
+          </a>
 
-  <span class="text-slate-400 hidden sm:inline">
-    Small steps. Real progress.
-  </span>
-</div>
+          <a href="progress.html"
+             class="block px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10">
+            📊 Progress Tracker
+          </a>
+
+          <a href="healthy-eating.html"
+             class="block px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10">
+            🥗 Healthy Eating
+          </a>
+
+          <a href="health-guide.html"
+             class="block px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10">
+            ❤️ Health Guide
+          </a>
+
+        </div>
+
       </nav>
 
       <!-- HERO CONTENT -->
       <div class="text-center pt-10 pb-24">
+
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm text-blue-100 mb-6">
           🚶 Your personalised walking target
         </div>
@@ -105,9 +168,11 @@
           <span>✓ No sign-up</span>
           <span>✓ Instant result</span>
         </div>
+
       </div>
     </div>
   </section>
+
 
   <!-- CALCULATOR -->
   <main class="max-w-5xl mx-auto px-4 sm:px-6 -mt-12 pb-16">
@@ -117,6 +182,7 @@
       <div class="p-6 sm:p-10">
 
         <div class="text-center mb-9">
+
           <p class="text-blue-600 font-bold text-sm uppercase tracking-widest">
             Step2Lose Calculator
           </p>
@@ -128,17 +194,21 @@
           <p class="text-slate-500 mt-2">
             It takes less than 30 seconds.
           </p>
+
         </div>
+
 
         <div class="max-w-xl mx-auto space-y-6">
 
           <!-- UNIT -->
           <div>
+
             <label class="block font-semibold text-sm mb-2">
               Choose your unit
             </label>
 
             <div class="grid grid-cols-2 bg-slate-100 rounded-xl p-1">
+
               <button
                 id="unit-lbs"
                 data-unit="lbs"
@@ -152,12 +222,16 @@
                 class="unit-btn py-3 rounded-lg font-semibold text-slate-600 transition">
                 Kilograms (kg)
               </button>
+
             </div>
           </div>
 
+
           <!-- WEIGHT -->
           <div>
-            <label for="current-weight" class="block font-semibold text-sm mb-2">
+
+            <label for="current-weight"
+                   class="block font-semibold text-sm mb-2">
               Current Weight
             </label>
 
@@ -168,11 +242,15 @@
               step="0.1"
               placeholder="e.g. 180"
               class="w-full border border-slate-300 rounded-xl px-4 py-4 text-lg transition">
+
           </div>
+
 
           <!-- TARGET -->
           <div>
-            <label for="loss-target" class="block font-semibold text-sm mb-2">
+
+            <label for="loss-target"
+                   class="block font-semibold text-sm mb-2">
               Weekly Weight-Loss Target
             </label>
 
@@ -184,11 +262,15 @@
             <p class="text-xs text-slate-500 mt-2">
               Choose a realistic target that suits you.
             </p>
+
           </div>
+
 
           <!-- DEFICIT -->
           <div>
-            <label for="deficit-split" class="block font-semibold text-sm mb-2">
+
+            <label for="deficit-split"
+                   class="block font-semibold text-sm mb-2">
               How would you like to create the estimated deficit?
             </label>
 
@@ -205,23 +287,30 @@
               </option>
 
             </select>
+
           </div>
 
-          <!-- BUTTON -->
+
+          <!-- CALCULATE -->
           <button
             id="calculate-btn"
             class="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl py-4 px-6 text-lg font-bold shadow-lg transition transform hover:-translate-y-0.5">
+
             Calculate My Step2Lose Plan →
+
           </button>
 
         </div>
 
+
         <!-- RESULTS -->
-        <div id="results-container" class="hidden max-w-3xl mx-auto mt-10">
+        <div id="results-container"
+             class="hidden max-w-3xl mx-auto mt-10">
 
           <div class="result-card rounded-3xl border border-blue-100 p-6 sm:p-8">
 
             <div class="text-center">
+
               <p class="text-blue-600 font-bold text-sm uppercase tracking-widest">
                 Your Step2Lose Plan
               </p>
@@ -231,52 +320,78 @@
               </p>
 
               <div class="mt-4">
-                <span id="steps-result" class="text-5xl sm:text-6xl font-extrabold text-slate-900">
+
+                <span id="steps-result"
+                      class="text-5xl sm:text-6xl font-extrabold text-slate-900">
                   0
                 </span>
 
                 <div class="text-lg font-semibold text-slate-600 mt-1">
                   extra steps / day
                 </div>
+
               </div>
+
             </div>
+
 
             <!-- PLAN GRID -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
 
               <div class="bg-white rounded-2xl p-4 text-center shadow-sm">
                 <div class="text-2xl">👟</div>
-                <div id="weekly-steps" class="font-bold text-lg mt-1">0</div>
+                <div id="weekly-steps"
+                     class="font-bold text-lg mt-1">
+                  0
+                </div>
                 <div class="text-xs text-slate-500">
                   extra steps/week
                 </div>
               </div>
 
+
               <div class="bg-white rounded-2xl p-4 text-center shadow-sm">
                 <div class="text-2xl">⏱️</div>
-                <div id="walking-time" class="font-bold text-lg mt-1">0 min</div>
+                <div id="walking-time"
+                     class="font-bold text-lg mt-1">
+                  0 min
+                </div>
                 <div class="text-xs text-slate-500">
                   approx. walking
                 </div>
               </div>
 
+
               <div class="bg-white rounded-2xl p-4 text-center shadow-sm">
                 <div class="text-2xl">📍</div>
-                <div id="walking-distance" class="font-bold text-lg mt-1">0 km</div>
+                <div id="walking-distance"
+                     class="font-bold text-lg mt-1">
+                  0 km
+                </div>
                 <div class="text-xs text-slate-500">
                   approx. distance
                 </div>
               </div>
 
-              <div id="diet-card" class="bg-white rounded-2xl p-4 text-center shadow-sm">
+
+              <div id="diet-card"
+                   class="bg-white rounded-2xl p-4 text-center shadow-sm">
+
                 <div class="text-2xl">🥗</div>
-                <div id="diet-result" class="font-bold text-lg mt-1">0 kcal</div>
+
+                <div id="diet-result"
+                     class="font-bold text-lg mt-1">
+                  0 kcal
+                </div>
+
                 <div class="text-xs text-slate-500">
                   estimated food reduction/day
                 </div>
+
               </div>
 
             </div>
+
 
             <!-- WEEKLY TARGET -->
             <div class="mt-6 bg-slate-900 text-white rounded-2xl p-5 sm:p-6">
@@ -288,13 +403,16 @@
                 </div>
 
                 <div>
+
                   <div class="font-bold text-lg">
                     Your 7-Day Goal
                   </div>
 
-                  <p id="weekly-message" class="text-slate-300 text-sm mt-1 leading-relaxed">
+                  <p id="weekly-message"
+                     class="text-slate-300 text-sm mt-1 leading-relaxed">
                     Follow your daily plan consistently and focus on building a sustainable routine.
                   </p>
+
                 </div>
 
               </div>
@@ -302,38 +420,53 @@
             </div>
 
           </div>
-<!-- HEALTHY EATING CTA -->
-<!-- ACTION BUTTONS -->
-<div class="mt-5 text-center">
 
-  <div class="flex flex-col sm:flex-row gap-3 justify-center">
 
-    <button id="challenge-btn"
-       class="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
-      🔥 Start My 30-Day Challenge →
-    </button>
+          <!-- ACTION BUTTONS -->
+          <div class="mt-5 text-center">
 
-    <a href="healthy-eating.html"
-       class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
-      🥗 View Healthy Meal Ideas →
-    </a>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
 
-  </div>
+              <button
+                id="challenge-btn"
+                class="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
 
-  <p class="text-xs text-slate-500 mt-3">
-    Build consistency with a 30-day walking challenge or explore healthy meal ideas.
-  </p>
+                🔥 Start My 30-Day Challenge →
 
-</div>
+              </button>
+
+              <a href="healthy-eating.html"
+                 class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition">
+
+                🥗 View Healthy Meal Ideas →
+
+              </a>
+
+            </div>
+
+            <p class="text-xs text-slate-500 mt-3">
+              Build consistency with a 30-day walking challenge or explore healthy meal ideas.
+            </p>
+
+          </div>
+
+
           <!-- DISCLAIMER -->
           <div class="mt-5 bg-amber-50 border border-amber-100 rounded-xl p-4">
+
             <p class="text-xs sm:text-sm text-amber-900 leading-relaxed">
-              <strong>Important:</strong> Step2Lose provides estimates based on general averages.
-              Actual energy expenditure and weight change vary between individuals. The food figure
-              means an estimated reduction from your usual intake — it is not your recommended total
-              daily calorie intake. Speak with a qualified healthcare professional before making
-              significant changes to your diet or exercise, particularly if you have a medical condition.
+
+              <strong>Important:</strong>
+              Step2Lose provides estimates based on general averages.
+              Actual energy expenditure and weight change vary between individuals.
+              The food figure means an estimated reduction from your usual intake —
+              it is not your recommended total daily calorie intake.
+              Speak with a qualified healthcare professional before making
+              significant changes to your diet or exercise, particularly if
+              you have a medical condition.
+
             </p>
+
           </div>
 
         </div>
@@ -341,10 +474,12 @@
       </div>
     </div>
 
+
     <!-- HOW IT WORKS -->
     <section class="py-16">
 
       <div class="text-center">
+
         <p class="text-blue-600 font-bold text-sm uppercase tracking-widest">
           Simple by design
         </p>
@@ -352,11 +487,14 @@
         <h2 class="text-3xl font-extrabold mt-2">
           How Step2Lose Works
         </h2>
+
       </div>
+
 
       <div class="grid md:grid-cols-3 gap-5 mt-9">
 
         <div class="bg-white border border-slate-200 rounded-2xl p-6">
+
           <div class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center font-extrabold text-blue-700">
             1
           </div>
@@ -368,9 +506,12 @@
           <p class="text-slate-500 mt-2 text-sm leading-relaxed">
             Enter your current weight and choose a weekly weight-loss target.
           </p>
+
         </div>
 
+
         <div class="bg-white border border-slate-200 rounded-2xl p-6">
+
           <div class="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center font-extrabold text-emerald-700">
             2
           </div>
@@ -382,9 +523,12 @@
           <p class="text-slate-500 mt-2 text-sm leading-relaxed">
             Step2Lose converts part of your estimated calorie deficit into an extra daily step target.
           </p>
+
         </div>
 
+
         <div class="bg-white border border-slate-200 rounded-2xl p-6">
+
           <div class="w-11 h-11 rounded-xl bg-purple-100 flex items-center justify-center font-extrabold text-purple-700">
             3
           </div>
@@ -396,6 +540,7 @@
           <p class="text-slate-500 mt-2 text-sm leading-relaxed">
             Use your daily target as a simple goal and build a sustainable walking routine.
           </p>
+
         </div>
 
       </div>
@@ -404,12 +549,38 @@
 
   </main>
 
+
   <!-- FOOTER -->
   <footer class="bg-slate-900 text-slate-400">
+
     <div class="max-w-6xl mx-auto px-5 py-8 text-center text-sm">
 
       <div class="text-white font-extrabold text-xl mb-2">
         STEP<span class="text-blue-400">2</span>LOSE
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-4">
+
+        <a href="index.html" class="hover:text-white">
+          Calculator
+        </a>
+
+        <a href="challenge.html" class="hover:text-white">
+          Challenge
+        </a>
+
+        <a href="progress.html" class="hover:text-white">
+          Progress
+        </a>
+
+        <a href="healthy-eating.html" class="hover:text-white">
+          Healthy Eating
+        </a>
+
+        <a href="health-guide.html" class="hover:text-white">
+          Health Guide
+        </a>
+
       </div>
 
       <p>
@@ -421,7 +592,9 @@
       </p>
 
     </div>
+
   </footer>
+
 
   <!-- ERROR MODAL -->
   <div
@@ -434,14 +607,17 @@
         Check your details
       </h3>
 
-      <p id="error-message" class="mt-2 text-sm text-slate-600">
+      <p id="error-message"
+         class="mt-2 text-sm text-slate-600">
         Please enter a valid weight.
       </p>
 
       <button
         id="close-error-btn"
         class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold mt-5">
+
         OK
+
       </button>
 
     </div>
@@ -453,39 +629,97 @@
 
     document.addEventListener('DOMContentLoaded', () => {
 
-      const unitLbsBtn = document.getElementById('unit-lbs');
-      const unitKgBtn = document.getElementById('unit-kg');
+      /* MOBILE MENU */
 
-      const weightInput = document.getElementById('current-weight');
-      const lossTargetSelect = document.getElementById('loss-target');
-      const deficitSplitSelect = document.getElementById('deficit-split');
+      const mobileMenuBtn =
+        document.getElementById('mobile-menu-btn');
 
-      const calculateBtn = document.getElementById('calculate-btn');
+      const mobileMenu =
+        document.getElementById('mobile-menu');
 
-      const resultsContainer = document.getElementById('results-container');
-
-      const stepsResult = document.getElementById('steps-result');
-      const weeklySteps = document.getElementById('weekly-steps');
-
-      const walkingTime = document.getElementById('walking-time');
-      const walkingDistance = document.getElementById('walking-distance');
-
-      const dietResult = document.getElementById('diet-result');
-      const dietCard = document.getElementById('diet-card');
-
-      const weeklyMessage = document.getElementById('weekly-message');
-
-      const errorModal = document.getElementById('error-modal');
-      const errorMessage = document.getElementById('error-message');
-      const closeErrorBtn = document.getElementById('close-error-btn');
+      const menuIcon =
+        document.getElementById('menu-icon');
 
 
-      /* EXISTING CALCULATION CONSTANTS */
+      mobileMenuBtn.addEventListener('click', () => {
+
+        const isHidden =
+          mobileMenu.classList.contains('hidden');
+
+        mobileMenu.classList.toggle('hidden');
+
+        menuIcon.textContent =
+          isHidden ? '✕' : '☰';
+
+        mobileMenuBtn.setAttribute(
+          'aria-expanded',
+          isHidden ? 'true' : 'false'
+        );
+
+      });
+
+
+      /* CALCULATOR ELEMENTS */
+
+      const unitLbsBtn =
+        document.getElementById('unit-lbs');
+
+      const unitKgBtn =
+        document.getElementById('unit-kg');
+
+      const weightInput =
+        document.getElementById('current-weight');
+
+      const lossTargetSelect =
+        document.getElementById('loss-target');
+
+      const deficitSplitSelect =
+        document.getElementById('deficit-split');
+
+      const calculateBtn =
+        document.getElementById('calculate-btn');
+
+      const resultsContainer =
+        document.getElementById('results-container');
+
+      const stepsResult =
+        document.getElementById('steps-result');
+
+      const weeklySteps =
+        document.getElementById('weekly-steps');
+
+      const walkingTime =
+        document.getElementById('walking-time');
+
+      const walkingDistance =
+        document.getElementById('walking-distance');
+
+      const dietResult =
+        document.getElementById('diet-result');
+
+      const dietCard =
+        document.getElementById('diet-card');
+
+      const weeklyMessage =
+        document.getElementById('weekly-message');
+
+      const errorModal =
+        document.getElementById('error-modal');
+
+      const errorMessage =
+        document.getElementById('error-message');
+
+      const closeErrorBtn =
+        document.getElementById('close-error-btn');
+
+
+      /* CALCULATION CONSTANTS */
 
       const CALORIES_PER_POUND = 3500;
       const CALORIES_PER_KG = 7700;
 
-      const BASE_STEPS_PER_CALORIE_ADJUSTER = 25 * 150;
+      const BASE_STEPS_PER_CALORIE_ADJUSTER =
+        25 * 150;
 
 
       const lossTargets = {
@@ -513,10 +747,14 @@
 
         lossTargets[unit].forEach(target => {
 
-          const option = document.createElement('option');
+          const option =
+            document.createElement('option');
 
-          option.value = target.value;
-          option.textContent = target.text;
+          option.value =
+            target.value;
+
+          option.textContent =
+            target.text;
 
           if (target.text.includes('Recommended')) {
             option.selected = true;
@@ -531,7 +769,9 @@
 
       function showError(message) {
 
-        errorMessage.textContent = message;
+        errorMessage.textContent =
+          message;
+
         errorModal.classList.remove('hidden');
 
       }
@@ -546,7 +786,8 @@
 
       function toggleUnitButtons(activeUnit) {
 
-        const lbsActive = activeUnit === 'lbs';
+        const lbsActive =
+          activeUnit === 'lbs';
 
         unitLbsBtn.className =
           'unit-btn py-3 rounded-lg font-semibold transition ' +
@@ -568,7 +809,8 @@
         const activeButton =
           document.querySelector('.unit-btn.active');
 
-        const unit = activeButton.dataset.unit;
+        const unit =
+          activeButton.dataset.unit;
 
         const currentWeight =
           parseFloat(weightInput.value);
@@ -582,7 +824,10 @@
 
         /* VALIDATION */
 
-        if (isNaN(currentWeight) || currentWeight <= 0) {
+        if (
+          isNaN(currentWeight) ||
+          currentWeight <= 0
+        ) {
 
           showError(
             'Please enter a valid positive number for your current weight.'
@@ -604,7 +849,7 @@
         }
 
 
-        /* ORIGINAL CALCULATION */
+        /* CALCULATION */
 
         const caloriesPerUnit =
           unit === 'lbs'
@@ -617,52 +862,46 @@
         const dailyDeficit =
           totalWeeklyDeficit / 7;
 
-
         const deficitFromSteps =
           dailyDeficit * deficitSplit;
 
         const deficitFromDiet =
           dailyDeficit * (1 - deficitSplit);
 
-
         const currentWeightInLbs =
           unit === 'kg'
             ? currentWeight * 2.20462
             : currentWeight;
 
-
         const stepsPerCalorie =
           BASE_STEPS_PER_CALORIE_ADJUSTER /
           currentWeightInLbs;
 
-
         const additionalDailySteps =
           deficitFromSteps * stepsPerCalorie;
 
-
         const roundedSteps =
           Math.round(additionalDailySteps);
-/* SEND CALCULATED TARGET TO 30-DAY CHALLENGE */
 
-const challengeBtn =
-  document.getElementById('challenge-btn');
 
-challengeBtn.onclick = function() {
-  window.location.href =
-    'challenge.html?steps=' + roundedSteps;
-};
+        /* CONNECT TO CHALLENGE */
+
+        const challengeBtn =
+          document.getElementById('challenge-btn');
+
+        challengeBtn.onclick = function() {
+
+          window.location.href =
+            'challenge.html?steps=' +
+            encodeURIComponent(roundedSteps);
+
+        };
+
 
         /* ADDITIONAL PLAN INFORMATION */
 
         const totalWeeklySteps =
           roundedSteps * 7;
-
-
-        /*
-          Approximate walking calculations:
-          ~100 steps per minute
-          ~1,300 steps per kilometre
-        */
 
         const minutes =
           Math.round(roundedSteps / 100);
@@ -676,17 +915,16 @@ challengeBtn.onclick = function() {
         stepsResult.textContent =
           roundedSteps.toLocaleString('en-US');
 
-
         weeklySteps.textContent =
           totalWeeklySteps.toLocaleString('en-US');
 
-
         walkingTime.textContent =
-          minutes.toLocaleString('en-US') + ' min';
-
+          minutes.toLocaleString('en-US') +
+          ' min';
 
         walkingDistance.textContent =
-          kilometres.toFixed(1) + ' km';
+          kilometres.toFixed(1) +
+          ' km';
 
 
         if (deficitFromDiet > 0) {
@@ -694,8 +932,9 @@ challengeBtn.onclick = function() {
           dietCard.classList.remove('hidden');
 
           dietResult.textContent =
-            Math.round(deficitFromDiet).toLocaleString('en-US')
-            + ' kcal';
+            Math.round(deficitFromDiet)
+              .toLocaleString('en-US') +
+            ' kcal';
 
         } else {
 
@@ -705,7 +944,9 @@ challengeBtn.onclick = function() {
 
 
         const targetUnit =
-          unit === 'lbs' ? 'lbs' : 'kg';
+          unit === 'lbs'
+            ? 'lbs'
+            : 'kg';
 
 
         weeklyMessage.textContent =
@@ -739,7 +980,8 @@ challengeBtn.onclick = function() {
 
         button.addEventListener('click', () => {
 
-          const unit = button.dataset.unit;
+          const unit =
+            button.dataset.unit;
 
           toggleUnitButtons(unit);
 
@@ -762,13 +1004,16 @@ challengeBtn.onclick = function() {
 
       /* ENTER KEY */
 
-      weightInput.addEventListener('keydown', event => {
+      weightInput.addEventListener(
+        'keydown',
+        event => {
 
-        if (event.key === 'Enter') {
-          calculateSteps();
+          if (event.key === 'Enter') {
+            calculateSteps();
+          }
+
         }
-
-      });
+      );
 
 
       /* ERROR MODAL */
@@ -779,13 +1024,16 @@ challengeBtn.onclick = function() {
       );
 
 
-      errorModal.addEventListener('click', event => {
+      errorModal.addEventListener(
+        'click',
+        event => {
 
-        if (event.target === errorModal) {
-          hideError();
+          if (event.target === errorModal) {
+            hideError();
+          }
+
         }
-
-      });
+      );
 
 
       /* INITIAL STATE */
