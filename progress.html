@@ -214,6 +214,19 @@
 </section>
 
 
+<!-- PROGRESS INSIGHTS -->
+<section class="mt-8 bg-white border border-slate-200 rounded-3xl p-6 md:p-8" aria-labelledby="insights-title">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <div><h2 id="insights-title" class="text-2xl font-black">Your Walking Insights</h2><p class="text-slate-500 text-sm mt-1">A simple overview based on your saved entries.</p></div>
+    <button id="export-progress" type="button" class="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-4 py-3 font-semibold">Download My Data (CSV)</button>
+  </div>
+  <div class="grid sm:grid-cols-2 gap-4 mt-6">
+    <div class="bg-blue-50 rounded-2xl p-5"><p class="text-sm text-slate-600">Average recorded daily steps</p><p id="average-steps" class="text-3xl font-black mt-2">—</p></div>
+    <div class="bg-emerald-50 rounded-2xl p-5"><p class="text-sm text-slate-600">Highest recorded daily steps</p><p id="best-steps" class="text-3xl font-black mt-2">—</p></div>
+  </div>
+  <p class="text-xs text-slate-500 mt-4">Averages use only days you have recorded, not missing days. Download your CSV regularly to keep a backup; records are stored in this browser, not synced between devices.</p>
+</section>
+
 <!-- HISTORY -->
 <section class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-8 mt-8">
 
@@ -585,6 +598,12 @@ function renderProgress() {
   totalEntries.textContent =
     entries.length;
 
+  const averageSteps = document.getElementById("average-steps");
+  const bestSteps = document.getElementById("best-steps");
+  const validSteps = entries.map(e => Number(e.steps)).filter(n => Number.isFinite(n) && n >= 0);
+  averageSteps.textContent = validSteps.length ? formatNumber(Math.round(validSteps.reduce((a,b) => a+b, 0) / validSteps.length)) : "—";
+  bestSteps.textContent = validSteps.length ? formatNumber(Math.max(...validSteps)) : "—";
+
 
   if (entries.length === 0) {
 
@@ -704,6 +723,29 @@ function renderProgress() {
 
 }
 
+
+
+/* EXPORT A LOCAL BACKUP WITHOUT ALTERING STORED DATA */
+document.getElementById("export-progress").addEventListener("click", function() {
+  const entries = loadEntries();
+  if (!entries.length) {
+    message.textContent = "Add a progress entry before downloading your data.";
+    message.className = "text-center text-sm mt-4 font-semibold text-amber-700";
+    message.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  const escapeCSV = value => '"' + String(value ?? "").replace(/"/g, '""') + '"';
+  const rows = [["Date","Weight","Unit","Total Steps"], ...entries.map(e => [e.date,e.weight,e.unit,e.steps])];
+  const csv = rows.map(row => row.map(escapeCSV).join(",")).join("\r\n");
+  const url = URL.createObjectURL(new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "step2lose-progress.csv";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 /* INITIAL LOAD */
 
