@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://www.step2lose.com/progress.html">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  
 </head>
 
 <body class="bg-slate-50 text-slate-900">
@@ -578,7 +578,7 @@ let weightChartInstance = null;
 function renderTrends(entries) {
   const weeklyContainer = document.getElementById("weekly-averages");
   const note = document.getElementById("trend-note");
-  const sorted = [...entries].filter(e => /^\\d{4}-\\d{2}-\\d{2}$/.test(e.date)).sort((a,b) => a.date.localeCompare(b.date));
+  const sorted = [...entries].filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date)).sort((a,b) => a.date.localeCompare(b.date));
   const weeks = new Map();
   for (const e of sorted) {
     const d = new Date(e.date + "T12:00:00");
@@ -609,16 +609,33 @@ function renderTrends(entries) {
   }
   if (!weeks.size) weeklyContainer.textContent = "Add an entry to see weekly averages.";
   note.textContent = sorted.length < 2 ? "Add at least two dated entries to see a meaningful trend." : "Trends are descriptive only; daily weight naturally fluctuates.";
-  if (typeof Chart === "undefined") {
-    note.textContent += " Charts are unavailable right now, but your saved entries and weekly summaries still work.";
-    return;
+  function drawChart(canvasId, values, color) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext("2d");
+    const w = Math.max(260, canvas.parentElement.clientWidth);
+    const h = 230;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(w*dpr); canvas.height = Math.round(h*dpr);
+    canvas.style.width = "100%"; canvas.style.height = h+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,w,h);
+    const pts = values.map((v,i)=>({v:Number(v),i})).filter(p=>Number.isFinite(p.v));
+    ctx.fillStyle="#64748b"; ctx.font="12px sans-serif";
+    if (!pts.length) {ctx.fillText("No recorded data yet",20,110);return;}
+    const min=Math.min(...pts.map(p=>p.v)), max=Math.max(...pts.map(p=>p.v));
+    const pad=Math.max(1,(max-min)*0.15);
+    const low=Math.max(0,min-pad), high=max+pad;
+    const x=i=>46+(w-65)*(values.length===1?0.5:i/(values.length-1));
+    const y=v=>18+(h-53)*(1-(v-low)/(high-low));
+    ctx.strokeStyle="#e2e8f0";ctx.lineWidth=1;
+    for(let i=0;i<3;i++){let yy=18+(h-53)*i/2;ctx.beginPath();ctx.moveTo(45,yy);ctx.lineTo(w-12,yy);ctx.stroke();ctx.fillText(Math.round(high-(high-low)*i/2).toLocaleString(),2,yy+4);}
+    ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.beginPath();pts.forEach((p,j)=>{if(j===0)ctx.moveTo(x(p.i),y(p.v));else ctx.lineTo(x(p.i),y(p.v));});ctx.stroke();
+    for(const p of pts){ctx.beginPath();ctx.arc(x(p.i),y(p.v),4,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
+    ctx.fillStyle="#64748b";ctx.fillText(sorted[0].date,45,h-7);
+    if(sorted.length>1)ctx.fillText(sorted[sorted.length-1].date,Math.max(45,w-105),h-7);
   }
-  if (stepsChartInstance) stepsChartInstance.destroy();
-  if (weightChartInstance) weightChartInstance.destroy();
-  const labels = sorted.map(e => e.date);
-  const shared = { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { maxTicksLimit: 6 } }, y: { beginAtZero: false } } };
-  stepsChartInstance = new Chart(document.getElementById("steps-chart"), { type: "line", data: { labels, datasets: [{ label: "Daily steps", data: sorted.map(e => Number(e.steps)), borderColor: "#2563eb", backgroundColor: "#dbeafe", tension: .2, pointRadius: 4 }] }, options: shared });
-  weightChartInstance = new Chart(document.getElementById("weight-chart"), { type: "line", data: { labels, datasets: [{ label: "Weight (kg)", data: sorted.map(e => e.unit === "lbs" ? Number(e.weight) * 0.45359237 : Number(e.weight)), borderColor: "#059669", backgroundColor: "#d1fae5", tension: .2, pointRadius: 4 }] }, options: shared });
+  drawChart("steps-chart",sorted.map(e=>e.steps),"#2563eb");
+  drawChart("weight-chart",sorted.map(e=>e.unit === "lbs" || e.unit === "lb" ? Number(e.weight)*0.45359237 : e.weight),"#059669");
 }
 
 /* RENDER */
