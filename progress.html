@@ -12,6 +12,7 @@
   <link rel="canonical" href="https://www.step2lose.com/progress.html">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
@@ -225,6 +226,20 @@
     <div class="bg-emerald-50 rounded-2xl p-5"><p class="text-sm text-slate-600">Highest recorded daily steps</p><p id="best-steps" class="text-3xl font-black mt-2">—</p></div>
   </div>
   <p class="text-xs text-slate-500 mt-4">Averages use only days you have recorded, not missing days. Download your CSV regularly to keep a backup; records are stored in this browser, not synced between devices.</p>
+</section>
+
+<!-- VISUAL PROGRESS DASHBOARD -->
+<section class="mt-8 bg-white border border-slate-200 rounded-3xl p-6 md:p-8" aria-labelledby="trends-title">
+  <h2 id="trends-title" class="text-2xl font-black">Progress Trends</h2>
+  <p class="text-slate-500 mt-2 text-sm">Charts use your saved entries. Days without entries are not treated as zero.</p>
+  <div class="grid md:grid-cols-2 gap-5 mt-6">
+    <div class="border border-slate-200 rounded-2xl p-4"><h3 class="font-bold">Daily Steps</h3><div style="height:230px;position:relative" class="mt-3"><canvas id="steps-chart" role="img" aria-label="Line chart of recorded daily steps"></canvas></div></div>
+    <div class="border border-slate-200 rounded-2xl p-4"><h3 class="font-bold">Weight Trend (kg)</h3><div style="height:230px;position:relative" class="mt-3"><canvas id="weight-chart" role="img" aria-label="Line chart of recorded body weight in kilograms"></canvas></div></div>
+  </div>
+  <h3 class="font-bold text-lg mt-7">Weekly Step Averages</h3>
+  <p class="text-sm text-slate-500 mt-1">Average steps on recorded days in each calendar week (Monday–Sunday).</p>
+  <div id="weekly-averages" class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3" aria-live="polite"></div>
+  <p id="trend-note" class="text-sm text-slate-500 mt-4"></p>
 </section>
 
 <!-- HISTORY -->
@@ -556,6 +571,56 @@ document
   });
 
 
+
+/* READ-ONLY CHARTS AND WEEKLY SUMMARY; EXISTING STORAGE FORMAT UNCHANGED */
+let stepsChartInstance = null;
+let weightChartInstance = null;
+function renderTrends(entries) {
+  const weeklyContainer = document.getElementById("weekly-averages");
+  const note = document.getElementById("trend-note");
+  const sorted = [...entries].filter(e => /^\\d{4}-\\d{2}-\\d{2}$/.test(e.date)).sort((a,b) => a.date.localeCompare(b.date));
+  const weeks = new Map();
+  for (const e of sorted) {
+    const d = new Date(e.date + "T12:00:00");
+    if (isNaN(d.getTime())) continue;
+    d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+    const week = [d.getFullYear(), String(d.getMonth()+1).padStart(2,"0"), String(d.getDate()).padStart(2,"0")].join("-");
+    const steps = Number(e.steps);
+    if (!Number.isFinite(steps) || steps < 0) continue;
+    const current = weeks.get(week) || { sum: 0, count: 0 };
+    current.sum += steps; current.count++;
+    weeks.set(week, current);
+  }
+  weeklyContainer.replaceChildren();
+  for (const [week, stats] of [...weeks].reverse().slice(0, 6)) {
+    const item = document.createElement("div");
+    item.className = "bg-slate-50 border border-slate-200 rounded-xl p-4";
+    const date = document.createElement("p");
+    date.className = "text-sm text-slate-600";
+    date.textContent = "Week of " + week;
+    const value = document.createElement("p");
+    value.className = "text-2xl font-black mt-1";
+    value.textContent = formatNumber(Math.round(stats.sum / stats.count)) + " steps";
+    const count = document.createElement("p");
+    count.className = "text-xs text-slate-500 mt-1";
+    count.textContent = stats.count + " recorded day" + (stats.count === 1 ? "" : "s");
+    item.append(date,value,count);
+    weeklyContainer.appendChild(item);
+  }
+  if (!weeks.size) weeklyContainer.textContent = "Add an entry to see weekly averages.";
+  note.textContent = sorted.length < 2 ? "Add at least two dated entries to see a meaningful trend." : "Trends are descriptive only; daily weight naturally fluctuates.";
+  if (typeof Chart === "undefined") {
+    note.textContent += " Charts are unavailable right now, but your saved entries and weekly summaries still work.";
+    return;
+  }
+  if (stepsChartInstance) stepsChartInstance.destroy();
+  if (weightChartInstance) weightChartInstance.destroy();
+  const labels = sorted.map(e => e.date);
+  const shared = { responsive: true, maintainAspectRatio: false, animation: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { maxTicksLimit: 6 } }, y: { beginAtZero: false } } };
+  stepsChartInstance = new Chart(document.getElementById("steps-chart"), { type: "line", data: { labels, datasets: [{ label: "Daily steps", data: sorted.map(e => Number(e.steps)), borderColor: "#2563eb", backgroundColor: "#dbeafe", tension: .2, pointRadius: 4 }] }, options: shared });
+  weightChartInstance = new Chart(document.getElementById("weight-chart"), { type: "line", data: { labels, datasets: [{ label: "Weight (kg)", data: sorted.map(e => e.unit === "lbs" ? Number(e.weight) * 0.45359237 : Number(e.weight)), borderColor: "#059669", backgroundColor: "#d1fae5", tension: .2, pointRadius: 4 }] }, options: shared });
+}
+
 /* RENDER */
 
 function renderProgress() {
@@ -594,6 +659,8 @@ function renderProgress() {
       "empty-state"
     );
 
+
+  renderTrends(entries);
 
   totalEntries.textContent =
     entries.length;
